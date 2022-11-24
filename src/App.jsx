@@ -76,11 +76,10 @@ export function App() {
 const handleEmailChange = (event) => {
   const value = event.target.value;
 
-
   setFormValidation({
     ...formValidation,
-   // email: validator.isEmail(value) ? "": "email is required",
-    email: value.length === 0 ? "email is required" : "",
+    email: validator.isEmail(value) ? "": "email is required",
+    //email: value.length === 0 ? "email is required" : "",
   
   });
 
@@ -92,7 +91,7 @@ const handleNameChange = (event) => {
 
   setFormValidation({
     ...formValidation,
-    name: value.length === 0 ? "Name is required" : "",
+    name: value.length === 0 ? "name is required" : "",
   });
 
   setName(value);
@@ -103,7 +102,7 @@ const handleAgeChange = (event) => {
 
   setFormValidation({
     ...formValidation,
-    age: value <= 18  ? "You must be above 18 to register" : "",
+    age: value <= 18  ? "you must be above 18 to register" : "",
   }
   
   );
@@ -113,10 +112,25 @@ const handleAgeChange = (event) => {
   
 const handlePasswordChange = (event) => {
   const value = event.target.value;
-  setFormValidation({
-    ...formValidation,
-    password: value.length < 5  ? "Password is too short" : "",
-  });
+  if(value.length === 0){
+    setFormValidation({
+      ...formValidation,
+      password:  "password is required"      
+    });
+  }else{
+    if (value.length < 5) {
+      setFormValidation({
+        ...formValidation,
+        password:  "password is too short"      
+      });
+    }else{
+      setFormValidation({
+        ...formValidation,
+        password:  ""      
+      });
+    }
+  }
+  
   
   setPassword(value);
 };
@@ -127,7 +141,7 @@ const handlePasswordCheckChange = (event) => {
   
   setFormValidation({
     ...formValidation,
-    passwordCheck: value !== password ? "Passwords do not match" : "",
+    passwordCheck: value !== password ? "passwords do not match" : "",
   });
   
   setPasswordCheck(value);
@@ -142,14 +156,14 @@ const handlemarcado =(e) => {
 
     setFormValidation({
       ...formValidation,
-      input: input == true ? "Passwords do not match" : "",
+      input: input == true ? "please read and accept the terms and conditions" : "",
     });
 }
 const isFormValid = Object.keys(formValidation).every(
   (key) => formValidation[key] === ""
 );
 const onSubmit= (e) =>{
-  e.preventDefault();
+e.preventDefault();
 let data={
   email:email,
   name: name,
@@ -158,18 +172,18 @@ let data={
   passwordCheck:passwordCheck
 }
 
-  registerUser(data);
-  setEmail("");
-  setName("");
-  setAge("");
-  setPassword("");
-  setPasswordCheck("");
-  setInput(false)
+  registerUser({email:email,name: name,age:age,password:password,passwordCheck:passwordCheck});
+  // setEmail("");
+  // setName("");
+  // setAge("");
+  // setPassword("");
+  // setPasswordCheck("");
+  // setInput(false)
 } 
 
   return (
     <div>
-      <form onSubmit={(e)=> onSubmit(e) }>
+      <form onSubmit={onSubmit}>
         <div>
           <label>
             Email
