@@ -80,7 +80,7 @@ const handleEmailChange = (event) => {
   setFormValidation({
     ...formValidation,
    // email: validator.isEmail(value) ? "": "email is required",
-   email: value.length === 0 ? "email is required" : "",
+    email: value.length === 0 ? "email is required" : "",
   
   });
 
@@ -92,7 +92,7 @@ const handleNameChange = (event) => {
 
   setFormValidation({
     ...formValidation,
-    name: value.length === 0 ? "name is required" : "",
+    name: value.length === 0 ? "Name is required" : "",
   });
 
   setName(value);
@@ -103,7 +103,7 @@ const handleAgeChange = (event) => {
 
   setFormValidation({
     ...formValidation,
-    age: value <= 18  ? "you must be above 18 to register" : "",
+    age: value <= 18  ? "You must be above 18 to register" : "",
   }
   
   );
@@ -115,7 +115,7 @@ const handlePasswordChange = (event) => {
   const value = event.target.value;
   setFormValidation({
     ...formValidation,
-    password: value.length < 5  ? "password is required" : "",
+    password: value.length < 5  ? "Password is too short" : "",
   });
   
   setPassword(value);
@@ -127,7 +127,7 @@ const handlePasswordCheckChange = (event) => {
   
   setFormValidation({
     ...formValidation,
-    passwordCheck: value !== password ? "password is too short" : "",
+    passwordCheck: value !== password ? "Passwords do not match" : "",
   });
   
   setPasswordCheck(value);
@@ -142,7 +142,7 @@ const handlemarcado =(e) => {
 
     setFormValidation({
       ...formValidation,
-      input: input == true ? "passwords do not match" : "",
+      input: input == true ? "Passwords do not match" : "",
     });
 }
 const isFormValid = Object.keys(formValidation).every(
